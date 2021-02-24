@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="ALL" monitorInterval="30">
+	<appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+		</Console>
+		<RollingFile name="RollingFile" fileName="./logs/spring-test.log"
+			filePattern="./logs/spring-test-%d{yyyy-MM-dd}-%i.log.zip">
+			<PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n" />
+			<Policies>
+				<!-- <TimeBasedTriggeringPolicy /> -->
+				<SizeBasedTriggeringPolicy size="1000 MB" />
+			</Policies>
+			<DefaultRolloverStrategy>
+				<Delete basePath="./logs/" maxDepth="1">
+					<IfFileName glob="spring-test-*.log.zip" />
+					<IfLastModified age="90d" />
+				</Delete>
+			</DefaultRolloverStrategy>
+		</RollingFile>
+	</appenders>
+
+	<loggers>
+		<logger name="org.springframework" level="ALL"></logger>
+		<logger name="org.mybatis" level="INFO"></logger>
+
+		<Root level="ALL">
+			<Appender-ref ref="Console" />
+			<appender-ref ref="RollingFile" />
+		</Root>
+	</loggers>
+</configuration>

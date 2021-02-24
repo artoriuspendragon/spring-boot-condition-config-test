@@ -1,0 +1,35 @@
+**/.DS_Store
+**/.settings/*
+**/.classpath
+**/target/
+db/*
+
+target
+*.iml
+.idea
+logs
+.DS_Store
+logs/*
+
+*/.settings/* 
+.settings/* 
+/target/
+*/test-output/*
+  
+# Java class files  
+
+# Eclipse project files
+.classpath
+.project
+*.log
+tmp/*
+
+/LOG_PATH_IS_UNDEFINEDLOG_FILE_IS_UNDEFINED
+
+.factorypath
+/.factorypath
+
+.daily
+/.daily
+
+**/~*

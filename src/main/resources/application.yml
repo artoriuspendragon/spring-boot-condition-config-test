@@ -1,0 +1,86 @@
+##########################################################
+##################  所有profile共有的配置  #################
+##########################################################
+server:
+  port: 8095
+  servlet:
+    session:
+      timeout: 600
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  autoconfigure:
+    ## 多数据源环境下必须排除掉 DataSourceAutoConfiguration，否则会导致循环依赖报错
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  thymeleaf:
+    prefix: classpath:/WEB-INF/pages
+    suffix: .html
+    cache: false
+    servlet:
+      content-type: text/html
+    encoding: UTF-8
+  messages:
+    basename: i18n/messages
+  mvc:
+    static-path-pattern: /**
+  resources:
+    static-locations: classpath:/static,classpath:/public,classpath:/resources,classpath:/META-INF/resources,classpath:/
+    chain:
+      strategy:
+        content:
+          enabled: true
+          paths: /**
+      cache: false
+  datasource:
+    druid:
+      max-wait: 30000
+      validation-query: SELECT 1
+      use-global-data-source-stat: true
+      stat:
+        enabled: true
+        log-slow-sql: true
+        slow-sql-millis: 1000
+      slf4j:
+        enabled: true
+        data-source-log-enabled: false
+        connection-log-enabled: false
+        statement-log-enabled: false
+        result-set-log-enabled: false
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+    
+jobs:
+    synchronizer:
+      fixRate: 600000
+      vip: 10.0.2.5
+    cron: 0 0 2 * * ?
+    expireDay: 180
+    
+query:
+    #报表查询最大天数
+    max-days: 180 
+    multi-task :
+      core-pool-size: 10
+      max-pool-size: 30
+      keep-alive-seconds: 60
+      queue-capacity: 1024
+      thread-name-prefix: bpi-query-task-
+    
+ftp:
+  enabled: true
+  pooling: true
+  host: 124.193.150.106
+  port: 5231
+  username: stream
+  password: stream
+  encoding: UTF-8
